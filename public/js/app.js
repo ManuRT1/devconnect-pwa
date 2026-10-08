@@ -11,3 +11,15 @@ document.getElementById('btn-sync').addEventListener('click', () => {
 document.getElementById('btn-new-post').addEventListener('click', () => {
     alert('Pronto podrás crear publicaciones aquí (y se guardarán offline).');
 });
+// 1. Verificamos si el navegador soporta Service Workers
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then(registro => {
+                console.log('Service Worker registrado con scope:', registro.scope);
+            })
+            .catch(error => {
+                console.error('Error al registrar el Service Worker:', error);
+            });
+    });
+}
